@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <link href="style.css" rel="stylesheet" />
+    <title>al_ne__t_gether</title>
+    <meta name="description" content="こと、もの、とか...">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+      .site-title img {
+        width: 100%; /* 親要素に合わせて幅を調整 */
+        max-width: 100%; /* 最大幅を100%に設定 */
+        display: block; /* ブロック要素として設定 */
+        margin: 0; /* マージンをリセット */
+        padding: 0; /* パディングをリセット */
+      }
+
+      /* リストアイテムの間に1pxの余白を追加 */
+      nav ul li {
+        margin-bottom: 1.3px;
+      }
+
+      /* スマートフォン用のスタイル */
+      @media only screen and (max-width: 600px) {
+        .site-title img {
+          max-width: none; /* 最大幅の制限を解除 */
+          margin: 20px 0px; /* 上下に20px、左右に10pxの空白を追加 */
+        }
+
+        body {
+          padding: 0 15px; /* 左右のパディングを10pxに設定 */
+        }
+           /* スマートフォン用にliの間隔を狭くする */
+        nav ul li {
+          margin-bottom: 1.5px; /* スマートフォン時の間隔を5pxに設定 */
+      }
+           }
+    </style>
+  </head>
+
+  <body>
+    <header id="header">
+      <h1 class="site-title"><a href="index.html"><img src="img/sukatev2.jpeg" alt="al_ne__t_gether" style="margin-bottom: 12px;"></a></h1>
+      <nav>
+        <ul>
+          <li><a href="k_t_.html"><p>こと</p></a></li>
+          <li><a href="m_n_.html"><p>もの</p></a></li>
+          <li><a href="madonokaradakara.html"><p>まどのからだから</p></a></li>
+          <li><a href="https://www.instagram.com/al_ne__t_gether/" target="_blank"><p>Instagram</p></a></li>
+          <li><a href="https://x.com/alnetgether" target="_blank"><p>X</p></a></li>
+          <li><a href="cv.html"><p>cv</p></a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <footer id="footer">
+      <p>&copy; 2024 al_ne__t_gether</p>
+    </footer>
+  </body>
+</html>
