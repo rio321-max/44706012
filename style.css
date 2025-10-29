@@ -1,0 +1,106 @@
+html {
+  font-size: 67%;  /* font-sizeは16pxの67%の10.67px */
+  font-family: 'Yu Gothic', sans-serif;
+  font-weight: 370;
+}
+
+p { 
+  font-size: 1.0rem; /* font-size : 14px と同等 */
+}
+
+h1 { 
+  font-size: 5.6rem; /* font-size: 56px と同等 */
+  font-weight: normal;
+}
+
+h2 { 
+  font-size: 70%;  /* font-sizeは16pxの62.5%の10px */
+  font-family: 'Yu Gothic', sans-serif;
+  font-weight: 400;
+}
+
+body {
+  color: #24292e;
+  padding: 20px 20px; /* 左右に20pxの空白を追加 */
+  max-width: 1200px;
+  margin-top: 10px;
+  margin: 0 auto; /* コンテンツを中央に配置するためのマージン */
+}
+
+a {
+  text-decoration: underline;
+  color: #0000ff; /* リンクのデフォルトの色を青に設定 */
+}
+
+a:hover {
+  color: #ff002b; /* ホバー時の色を赤に設定 */
+}
+
+a:visited {
+  color: #0000ff; /* 見た目を維持するために、訪問済みリンクも青に設定 */
+}
+
+img {
+  max-width: 100%;
+}
+
+li {
+  list-style: none;
+}
+
+#footer {
+  margin-top: 20px; /* 上側のマージン */
+}
+
+.container {
+  max-width: 800px; /* コンテンツの最大幅 */
+  margin: 0 auto; /* 中央に配置 */
+  padding: 20px;
+}
+
+.portfolio-item {
+}
+
+.portfolio-item img {
+  display: block; /* ブロック要素として設定 */
+  width: 70%; /* 親要素に合わせて幅を調整 */
+  height: auto; /* アスペクト比を保持するために高さを自動に設定 */
+  margin-bottom: -10px; /* 画像の下側の余白を調整 */
+}
+
+.caption {
+  display: block; /* ブロック要素として設定 */
+  font-size: 0.5rem; /* キャプションのフォントサイズ */
+  font-weight: normal;
+  margin: 0; /* キャプションの余白をリセット */
+}
+
+@media only screen and (max-width: 600px) {
+  /* 画面幅が600px以下の場合のスタイル */
+
+  html {
+    font-size: 64%;  /* font-sizeは16pxの64%の10px */
+    font-family: 'Yu Gothic', sans-serif;
+    font-weight: 400;
+  }
+
+  body {
+    font-size: 70%; /* ここは任意で調整 */
+    padding: 15px 15px; /* 左右のマージンを10pxに調整 */
+  }
+
+  p {
+    font-size: 0.9rem; /* pタグの文字サイズを小さく */
+  }
+
+  .portfolio-item img {
+    display: block; /* ブロック要素として設定 */
+    width: 100%; /* 親要素に合わせて幅を100%に設定 */
+    height: auto; /* アスペクト比を保持するために高さを自動に設定 */
+    margin-bottom: -7px; /* 画像の下側の余白を調整 */
+  }
+
+  .caption {
+    font-size: 0.8rem; /* キャプションのフォントサイズを小さく */
+  }
+}
