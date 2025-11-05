@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
+    <title>3</title>
+    <style>
+        /* (既存のCSSは省略) */
+        h1 { width: 100%; }
+        p { width: 100%; }
+        footer p { font-size: 1.1em; }
+        @media (max-width: 600px) {
+            h1, p { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <p id="reading-text" style="font-size: 3em;"></p>
+    </div>
+
+    <script>
+        const textSegments = [
+    "かつての処刑台が", 
+    "演台に転用された後でも、", 
+    "広場の演台は",
+    "都合のいい処刑台のままであった。",
+    "「話す機会を与えてやっている」", 
+    "「聞いてやっている」", 
+    "「関心を持ってやっている」", 
+    "そのように、", 
+    "自分だけはいい人間、", 
+    "まともな人間であると、", 
+    "加害者だらけの場に", 
+    "当事者性の強い方を、", 
+    "立たせ続け", 
+    "スピーチをさせて、", 
+    "見せしめにするための台と、", 
+    "踏みにじるための台に立ちながら、", 
+    "そこから降りようともせず、", 
+    "加害者ではないかのようなふりをして、", 
+    "使うことを強制した言葉で、", 
+    "何十年も繰り返し、", 
+    "繰り返し", 
+    "説明をさせ", 
+    "説明をさせ", 
+    "拍手した。", 
+    "拍手した。", 
+    "「連帯」した。",
+    "「連帯」した。",
+    "〜広場は満足して帰る人たちあふれている。",
+    "「今日のデモは成功だ。」"
+];
+
+// 全体のテキスト（最後に表示するため）
+const fullText = textSegments.join(''); // すべてのセグメントを結合
+
+const displayElement = document.getElementById('reading-text');
+let segmentIndex = 0; // 現在表示している配列のインデックス
+
+const FADE_OUT_DELAY = 500; // 0.5秒の待機時間を設定 (ミリ秒)
+
+function showNextSegment() {
+    // 全てのセグメントを表示し終えた場合
+    if (segmentIndex >= textSegments.length) {
+        // 1. 最後の処理: 全体を一括で表示する
+        displayElement.innerHTML = fullText.replace(/〜/, '<br><br>〜'); // 必要に応じて改行を挿入
+        return; 
+    }
+
+    const currentSegment = textSegments[segmentIndex];
+    
+    // 2. 表示時間の計算: 文字数 × 1000ミリ秒 (1秒)
+    const displayTime = currentSegment.length * 400;
+
+    // 3. 表示要素をリセットし、現在のフレーズを表示
+    displayElement.innerHTML = currentSegment;
+
+    // 4. 指定時間後に非表示にし、次のフレーズを表示する処理をスケジュール
+    setTimeout(() => {
+        // ① 現在のフレーズを非表示（空にする）
+        displayElement.innerHTML = '';
+        
+        // ② 0.5秒待機してから次の表示処理を呼び出す
+        setTimeout(() => {
+            segmentIndex++;
+            showNextSegment();
+        }, FADE_OUT_DELAY); 
+        
+    }, displayTime);
+}
+
+// 最初のセグメントの表示を開始
+document.addEventListener('DOMContentLoaded', () => {
+    // ページロード後、処理を開始
+    showNextSegment(); 
+});
+    </script>
+</body>
+</html>
