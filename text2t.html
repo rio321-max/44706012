@@ -4,121 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" />
-    <title>3</title>
+    <title>3 - 縦書き全文表示</title>
     <style>
-        /* (既存のCSSは省略) */
-        h1 { width: 100%; }
-        p { width: 100%; }
-        footer p { font-size: 1.1em; }
+        /* CSSは、縦書き・巨大化・スクロール設定のみに絞ります */
+        #reading-text {
+            /* 1. 縦書きを指定 (右から左へ) */
+            writing-mode: vertical-rl; 
+            
+            /* 2. 画面の高さ確保とスクロール設定 */
+            height: 100vh; /* 画面の高さ全体を使う */
+            width: 100vw;
+            overflow-x: scroll; /* 縦書きの場合、横方向（右側）にスクロール */
+            overflow-y: hidden; /* 縦方向のスクロールは禁止 */
+
+            /* 3. 配置を右上から開始 */
+            display: flex;
+            justify-content: flex-start; /* 右端（書き始め）に寄せる */
+            align-items: flex-start;   /* 上端に寄せる */
+
+            /* 4. 巨大化 */
+            font-size: 15vw; /* 画面幅の15%のサイズ。適宜調整してください */
+            line-height: 1.2; 
+            padding: 5vh 5vw; 
+            margin: 0;
+            
+            /* アニメーション用の不要なスタイルを削除 */
+            /* transition: none; */
+            /* animation: none; */
+        }
+
+        /* スマートフォンの縦書き調整 */
         @media (max-width: 600px) {
-            h1, p { width: 100%; }
+            #reading-text {
+                font-size: 10vw; /* スマホではフォントを小さく */
+                height: 90vh;
+            }
         }
     </style>
 </head>
 <body>
     <div class="content">
-        <p id="reading-text" style="font-size: 3em;"></p>
+        <p id="reading-text">
+            〜広場の遠くにある演台の方から放送で<br>（上り4音チャイムとサイレンの音）<br>「訓練、訓練。ミサイル発射。訓練放送です。ミサイルが発射されたものとみられます。訓練放送です。建物の中、または地下に避難してください。」<br>（下り4音チャイムが2回流れる）<br>〜広場にいた人たちは(あなたは)演台まで歩き、次の文章を読み上げた。<br>「上り4音チャイムとサイレンの音。訓練、訓練。", 
+ミサイル発射。訓練放送です、訓練放送です。訓練、 訓練。ミサイル発射。ミサイルを発射しました訓練、訓練、訓練でミサイルを発射して、広場にいた人たちは逃げる。ミサイルミサイルミサイルを訓練で、下り4音チャイムは訓練サイレン広場2回流れる広場で」
+
+        </p>
     </div>
-
-    <script>
-        const textSegments = [
-    "〜広場の遠くにある演台の方から放送で",
-    "（上り4音チャイムとサイレンの音）",
-    "「", 
-    "訓練、",
-    "訓練。", 
-    "ミサイル発射。", 
-    "訓練放送です。", 
-    "ミサイルが発射されたものとみられます。", 
-    "訓練放送です。", 
-    "建物の中、", 
-    "または地下に避難してください。", 
-    "」", 
-    "（下り4音チャイムが2回流れる）",
-    "〜広場にいた人たちは", 
-    "演台まで歩き", 
-    "次の文章を読み上げた。", 
-    "「", 
-    "上り4音チャイムとサイレンの音。", 
-    "訓練、", 
-    "訓練。", 
-    "ミサイル発射。", 
-    "訓練放送です、", 
-    "訓練放送です。", 
-    "訓練、", 
-    "訓練。", 
-    "ミサイル発射。", 
-    "ミサイルを", 
-    "発射しました", 
-    "訓練、", 
-    "訓練、", 
-    "訓練で", 
-    "ミサイルを発射して、", 
-    "広場にいた人たちは", 
-    "逃げる。", 
-    "ミサイル", 
-    "ミサイル", 
-    "ミサイルを訓練で、", 
-    "下り4音チャイムは", 
-    "訓練", 
-    "サイレン", 
-    "広場", 
-    "2回流れる広場で",
-    "」",
-];
-
-// 全体のテキスト（最後に表示するため）
-const fullText = textSegments
-    // 各要素の前後の空白（スペース、タブ、改行）を削除
-    .map(segment => segment.trim()) 
-    // その後、配列を結合
-    .join('');
-
-const displayElement = document.getElementById('reading-text');
-let segmentIndex = 0; // 現在表示している配列のインデックス
-
-const FADE_OUT_DELAY = 495; // 0.5秒の待機時間を設定 (ミリ秒)
-
-function showNextSegment() {
-    // 全てのセグメントを表示し終えた場合
-    if (segmentIndex >= textSegments.length) {
-        // ✨ 修正案: 2番目の「〜」の前に改行を挿入するようにする
-        // 最初の「〜広場の遠くにある」はそのままにし、
-        // 2番目の「〜広場にいた人たちは」の前に改行を入れる。
-        const finalContent = fullText.replace('〜広場にいた人たちは', '<br><br>〜広場にいた人たちは');
-        
-        displayElement.innerHTML = finalContent;
-        window.scrollTo(0, 0); // スクロール位置も念のためリセット
-        return; 
-    }
-
-    const currentSegment = textSegments[segmentIndex];
-    
-    // 2. 表示時間の計算: 文字数 × 1000ミリ秒 (1秒)
-    const displayTime = currentSegment.length * 350;
-
-    // 3. 表示要素をリセットし、現在のフレーズを表示
-    displayElement.innerHTML = currentSegment;
-
-    // 4. 指定時間後に非表示にし、次のフレーズを表示する処理をスケジュール
-    setTimeout(() => {
-        // ① 現在のフレーズを非表示（空にする）
-        displayElement.innerHTML = '';
-        
-        // ② 0.5秒待機してから次の表示処理を呼び出す
-        setTimeout(() => {
-            segmentIndex++;
-            showNextSegment();
-        }, FADE_OUT_DELAY); 
-        
-    }, displayTime);
-}
-
-// 最初のセグメントの表示を開始
-document.addEventListener('DOMContentLoaded', () => {
-    // ページロード後、処理を開始
-    showNextSegment(); 
-});
-    </script>
 </body>
 </html>
