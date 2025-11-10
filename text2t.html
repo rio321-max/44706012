@@ -6,41 +6,46 @@
     <link href="style.css" rel="stylesheet" />
     <title>3 - 縦書き全文表示</title>
     <style>
-        /* CSSは、縦書き・巨大化・スクロール設定のみに絞ります */
+    /* CSSは、縦書き・巨大化・スクロール設定のみに絞ります */
+    #reading-text {
+        /* 1. 縦書きを指定 (右から左へ) */
+        writing-mode: vertical-rl; 
+        
+        /* 2. 画面の高さ確保とスクロール設定 */
+        height: 100vh; /* 画面の高さ全体を使う */
+        width: 100vw;
+        overflow-x: scroll; /* 縦書きの場合、横方向（右側）にスクロール */
+        overflow-y: hidden; /* 縦方向のスクロールは禁止 */
+
+        /* 3. 配置を右上から開始 */
+        display: flex;
+        justify-content: flex-start; /* 右端（書き始め）に寄せる */
+        align-items: flex-start;   /* 上端に寄せる */
+
+        /* 4. 【修正】文字を小さくする (15vw -> 10vw) */
+        font-size: 10vw; 
+        line-height: 1.2; 
+        
+        /* 5. 【修正】余白を調整 */
+        /* 上の余白（align-itemsがflex-startのため、これが上側の余白）を狭く */
+        /* 下の文字切れを解消するため、下の余白も調整 */
+        /* padding: [上] [右] [下] [左] */
+        padding: 2vh 5vw 2vh 5vw; /* 上下左右の余白を狭くしました (5vh -> 2vh) */
+        
+        margin: 0;
+        
+        /* アニメーション用の不要なスタイルを削除 */
+    }
+
+    /* スマートフォンの縦書き調整 */
+    @media (max-width: 600px) {
         #reading-text {
-            /* 1. 縦書きを指定 (右から左へ) */
-            writing-mode: vertical-rl; 
-            
-            /* 2. 画面の高さ確保とスクロール設定 */
-            height: 100vh; /* 画面の高さ全体を使う */
-            width: 100vw;
-            overflow-x: scroll; /* 縦書きの場合、横方向（右側）にスクロール */
-            overflow-y: hidden; /* 縦方向のスクロールは禁止 */
-
-            /* 3. 配置を右上から開始 */
-            display: flex;
-            justify-content: flex-start; /* 右端（書き始め）に寄せる */
-            align-items: flex-start;   /* 上端に寄せる */
-
-            /* 4. 巨大化 */
-            font-size: 15vw; /* 画面幅の15%のサイズ。適宜調整してください */
-            line-height: 1.2; 
-            padding: 5vh 5vw; 
-            margin: 0;
-            
-            /* アニメーション用の不要なスタイルを削除 */
-            /* transition: none; */
-            /* animation: none; */
+            font-size: 8vw; /* スマホではさらに小さく */
+            height: 90vh;
+            padding: 1vh 2vw 1vh 2vw; /* スマホでも余白を狭く */
         }
-
-        /* スマートフォンの縦書き調整 */
-        @media (max-width: 600px) {
-            #reading-text {
-                font-size: 10vw; /* スマホではフォントを小さく */
-                height: 90vh;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
     <div class="content">
