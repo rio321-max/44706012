@@ -10,6 +10,9 @@
     #reading-text {
         /* 1. 縦書きを指定 (右から左へ) */
         writing-mode: vertical-rl; 
+    
+        /* ✨ 修正: 行間を少しだけ広くします (1.2 -> 1.4へ) ✨ */
+        line-height: 1.4;
         
         /* 2. 画面の高さ確保とスクロール設定 */
         height: 100vh; /* 画面の高さ全体を使う */
@@ -23,7 +26,7 @@
         align-items: flex-start;   /* 上端に寄せる */
 
         /* 4. 【修正】文字を小さくする (15vw -> 10vw) */
-        font-size: 10vw; 
+        font-size: 13vw; 
         line-height: 1.2; 
         
         /* 5. 【修正】余白を調整 */
