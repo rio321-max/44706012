@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
+    <title>3 - 縦書き全文表示</title>
+    <style>
+    /* CSSは、縦書き・巨大化・スクロール設定のみに絞ります */
+    #reading-text {
+        /* 1. 縦書きを指定 (右から左へ) */
+        writing-mode: vertical-rl; 
+        
+        /* 2. 画面の高さ確保とスクロール設定 */
+        height: 100vh; /* 画面の高さ全体を使う */
+        width: 100vw;
+        overflow-x: scroll; /* 縦書きの場合、横方向（右側）にスクロール */
+        overflow-y: hidden; /* 縦方向のスクロールは禁止 */
+
+        /* 3. 配置を右上から開始 */
+        display: flex;
+        justify-content: flex-start; /* 右端（書き始め）に寄せる */
+        align-items: flex-start;   /* 上端に寄せる */
+
+        /* 4. 【修正】文字を小さくする (15vw -> 10vw) */
+        font-size: 10vw; /* 15vwから10vwに修正し、行間も1.4に統一 */
+        line-height: 1.4; 
+        
+        /* 5. 【修正】余白を調整 (上部の余白を狭く) */
+        padding: 1vh 5vw 10vh 5vw; 
+        
+        margin: 0;
+    }
+
+    /* スマートフォンの縦書き調整 */
+    @media (max-width: 600px) {
+        #reading-text {
+            font-size: 8vw; /* スマホではさらに小さく */
+            height: 83vh;
+            /* padding: [上] [右] [下] [左] */
+            padding: 1vh 3vw 5vh 2vw; 
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <p id="reading-text">
+            広場を広場として使うことは“抵抗”だが、それは広場に立てる人の言葉ではない。広場に立たないと殺されてしまう人の言葉であった。たくさんの人々には殺さないための責任があった。殺してしまった人に対する責任があった。
+            <br>
+            <br>広場は満足して帰る人たちあふれている。何十年も繰り返し、話す機会を与え、聞いてあげて、関心を持ってあげた私(たち)は、何十年も繰り返し、説明をさせ、連帯した。
+            <br>
+            <br>　「今日のデモは成功だ。」
+            <br>　
+            
+        </p>
+    </div>
+
+    <!-- アニメーションは不要なため、JavaScriptは削除または空にします -->
+    <script></script>
+</body>
+</html>
